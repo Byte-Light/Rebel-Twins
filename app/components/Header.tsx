@@ -1,5 +1,6 @@
 import React from 'react';
 import Link from 'next/link';
+import { FaSearch } from 'react-icons/fa';
 
 const Header: React.FC = () => {
   return (
@@ -9,13 +10,11 @@ const Header: React.FC = () => {
         <div className="flex items-center">
           <Link href="/">
             <img
-              src="/logo.png" 
+              src="/images/rebel_logo_bg.webp" 
               alt="Rebel Twins Logo"
-              className="h-12 w-auto"
+              className="h-16 w-auto"
             />
           </Link>
-          <span className="ml-3 text-lg font-bold text-gray-900">REBEL TWINS</span>
-          <span className="ml-2 text-sm font-medium text-gray-500">INDIE GAMES</span>
         </div>
 
         {/* Nav Menu */}
@@ -29,9 +28,7 @@ const Header: React.FC = () => {
         {/* Search Icon */}
         <div className="flex items-center">
           <button className="text-gray-500 hover:text-yellow-600 focus:outline-none">
-            <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M8 4a8 8 0 104 0a8 8 0 000 16zM21 21l-5.4-5.4" />
-            </svg>
+           <FaSearch style={{fontSize: '24px' }} />
           </button>
         </div>
 

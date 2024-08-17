@@ -20,7 +20,7 @@ const HeroSection: React.FC = () => {
         {/* Image Section */}
         <div className="lg:w-1/2 relative">
           <Image
-            src="/images/dragon-hills-2.png"  // Path to your image
+            src="/images/dragon_hills.png"  // Path to your image
             alt="Dragon Hills 2"
             layout="responsive"
             width={600}

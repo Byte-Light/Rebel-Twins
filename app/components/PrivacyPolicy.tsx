@@ -2,8 +2,8 @@ import React from 'react';
 
 const PrivacyPolicy: React.FC = () => {
   return (
-    <footer className="bg-gray-900 text-white py-4">
-      <div className="container mx-auto flex justify-center md:justify-between items-center">
+    <footer className="bg-gray-800 text-white py-4 h-32">
+      <div className="container mx-auto flex justify-center gap-24 items-center">
         <a
           href="#"
           className="text-sm text-gray-400 hover:text-white transition-colors duration-300"

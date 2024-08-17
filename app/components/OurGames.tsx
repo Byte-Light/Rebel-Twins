@@ -11,22 +11,37 @@ const games: Game[] = [
   {
     title: 'Castle Master TD',
     description: 'Build & defend your castle in this gripping tower defense game.',
-    image: '/images/castle-master-td.png', // Image path
+    image: '/images/castle_masters.webp', // Image path
   },
   {
     title: 'Cookies Must Die',
     description: 'Stop a group of evil, mutant cookies before they reduce whole city to rubble!',
-    image: '/images/cookies-must-die.png',
+    image: '/images/cookies.webp',
   },
   {
     title: 'Dragon Hills 2',
     description: 'Zombies, dragons, thrilling battles and pure destructive fun for everyone!',
-    image: '/images/dragon-hills-2.png',
+    image: '/images/dragon_hills2.webp',
   },
   {
     title: 'Dragon Hills',
     description: 'Take control of a very dangerous Dragon in this action-packed adventure.',
-    image: '/images/dragon-hills.png',
+    image: '/images/dragon_hills.png',
+  },
+  {
+    title: 'Daddy Was A Thief',
+    description: 'Shatter and smash menacing asteroids with powerful weapons!',
+    image: '/images/daddy_thief.webp',
+  },
+  {
+    title: 'Aliens Drive Me Crazy',
+    description: 'Smash everything in this crazy, chaotic, simple but challenging, and fun game!',
+    image: '/images/alien_crazy.webp',
+  },
+  {
+    title: 'Crumble Zone',
+    description: 'One of our first projects',
+    image: '/images/crumble_zone.webp',
   },
 ];
 

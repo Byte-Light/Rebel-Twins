@@ -8,23 +8,23 @@ interface Testimonial {
 
 const testimonials: Testimonial[] = [
   {
-    name: 'funmilayo',
-    avatar: '/avatars/funmilayo.png',
+    name: 'Funmilayo',
+    avatar: 'https://randomuser.me/api/portraits/women/1.jpg', // Example image URL
     quote: '“This is one of the most satisfying games to play. I always find myself downloading whenever I get a new phone”',
   },
   {
     name: 'Harry',
-    avatar: '/avatars/harry.png',
+    avatar: 'https://randomuser.me/api/portraits/men/2.jpg', // Example image URL
     quote: '“What a nice & amazing game it is!! I never see this type of game there. I just 😘😍 love this game”',
   },
   {
-    name: 'DALLEN',
-    avatar: '/avatars/dallen.png',
+    name: 'Dallen',
+    avatar: 'https://randomuser.me/api/portraits/men/3.jpg', // Example image URL
     quote: '“The game is breathtaking. Every moment is surprising.”',
   },
   {
     name: 'Elliot',
-    avatar: '/avatars/elliot.png',
+    avatar: 'https://randomuser.me/api/portraits/men/4.jpg', // Example image URL
     quote: '“Love the story, bosses, power-ups, and the crazy side to the game. Well done!”',
   },
 ];
