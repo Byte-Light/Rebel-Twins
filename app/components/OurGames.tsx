@@ -1,4 +1,6 @@
-import React from 'react';
+"use client"
+import React, { useRef } from 'react';
+import { motion, useInView } from 'framer-motion';
 import Image from 'next/image';
 
 interface Game {
@@ -11,7 +13,7 @@ const games: Game[] = [
   {
     title: 'Castle Master TD',
     description: 'Build & defend your castle in this gripping tower defense game.',
-    image: '/images/castle_masters.webp', // Image path
+    image: '/images/castle_masters.webp',
   },
   {
     title: 'Cookies Must Die',
@@ -46,15 +48,39 @@ const games: Game[] = [
 ];
 
 const OurGames: React.FC = () => {
+  const ref = useRef(null);
+  const isInView = useInView(ref, { once: true });
+
   return (
-    <section className="py-12 bg-white">
+    <motion.section
+      className="py-12 bg-white"
+      ref={ref}
+      initial={{ opacity: 0 }}
+      animate={isInView ? { opacity: 1 } : { opacity: 0 }}
+      transition={{ duration: 0.5 }}
+    >
       <div className="container mx-auto text-center">
         <h2 className="text-3xl lg:text-4xl font-bold text-gray-800 mb-4">OUR GAMES</h2>
         <p className="text-gray-600 mb-12">Play our latest and the most popular games!</p>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+        <motion.div
+          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8"
+          initial="hidden"
+          animate={isInView ? "visible" : "hidden"}
+          variants={{
+            visible: { opacity: 1, transition: { staggerChildren: 0.2 } },
+            hidden: { opacity: 0 },
+          }}
+        >
           {games.map((game, index) => (
-            <div key={index} className="flex flex-col items-center text-center">
+            <motion.div
+              key={index}
+              className="flex flex-col items-center text-center"
+              variants={{
+                visible: { opacity: 1, y: 0 },
+                hidden: { opacity: 0, y: 50 },
+              }}
+            >
               <div className="w-24 h-24 lg:w-32 lg:h-32 mb-4">
                 <Image
                   src={game.image}
@@ -66,11 +92,11 @@ const OurGames: React.FC = () => {
               </div>
               <h3 className="text-xl font-semibold text-gray-900">{game.title}</h3>
               <p className="text-gray-600 mt-2">{game.description}</p>
-            </div>
+            </motion.div>
           ))}
-        </div>
+        </motion.div>
       </div>
-    </section>
+    </motion.section>
   );
 };
 

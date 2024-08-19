@@ -1,21 +1,44 @@
-import React from 'react';
+"use client"
+import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { FaSearch } from 'react-icons/fa';
+import { motion } from 'framer-motion';
 
 const Header: React.FC = () => {
+  const [scrollY, setScrollY] = useState(0);
+
+  // Track the scroll position
+  useEffect(() => {
+    const handleScroll = () => {
+      setScrollY(window.scrollY);
+    };
+
+    window.addEventListener('scroll', handleScroll);
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+    };
+  }, []);
+
   return (
-    <header className="bg-white border-b-2">
+    <header className="bg-white border-b-2 sticky top-0 z-50">
       <div className="container mx-auto flex justify-between items-center p-4">
         {/* Logo Section */}
-        <div className="flex items-center">
+        <motion.div
+          className="flex items-center"
+          animate={{
+            scale: scrollY > 50 ? 0.8 : 1,
+            opacity: scrollY > 50 ? 0.7 : 1,
+          }}
+          transition={{ duration: 0.3, ease: 'easeInOut' }}
+        >
           <Link href="/">
             <img
-              src="/images/rebel_logo_bg.webp" 
+              src="/images/rebel_logo_bg.webp"
               alt="Rebel Twins Logo"
               className="h-16 w-auto"
             />
           </Link>
-        </div>
+        </motion.div>
 
         {/* Nav Menu */}
         <nav className="hidden md:flex space-x-6">
@@ -28,7 +51,7 @@ const Header: React.FC = () => {
         {/* Search Icon */}
         <div className="flex items-center">
           <button className="text-gray-500 hover:text-yellow-600 focus:outline-none">
-           <FaSearch style={{fontSize: '24px' }} />
+            <FaSearch style={{ fontSize: '24px' }} />
           </button>
         </div>
 

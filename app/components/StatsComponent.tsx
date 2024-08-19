@@ -1,6 +1,6 @@
 "use client"
-import React, { useState, useEffect } from 'react';
-import { motion } from 'framer-motion';
+import React, { useState, useEffect, useRef } from 'react';
+import { motion, useInView } from 'framer-motion';
 
 interface StatsComponentProps {
   downloads: number;
@@ -12,6 +12,9 @@ const StatsComponent: React.FC<StatsComponentProps> = ({ downloads, games, cupsO
   const [downloadCount, setDownloadCount] = useState(0);
   const [gameCount, setGameCount] = useState(0);
   const [coffeeCount, setCoffeeCount] = useState(0);
+  
+  const ref = useRef(null);
+  const isInView = useInView(ref, { once: true });
 
   const countUp = (
     start: number,
@@ -20,7 +23,7 @@ const StatsComponent: React.FC<StatsComponentProps> = ({ downloads, games, cupsO
     duration: number
   ) => {
     const totalSteps = end - start;
-    const stepTime = (duration * 1000) / totalSteps; // Time per step in milliseconds
+    const stepTime = (duration * 1000) / totalSteps;
 
     if (totalSteps > 0) {
       const increment = () => {
@@ -41,24 +44,26 @@ const StatsComponent: React.FC<StatsComponentProps> = ({ downloads, games, cupsO
   };
 
   useEffect(() => {
-    countUp(0, downloads, setDownloadCount, 4); // 4 seconds duration
-    countUp(0, games, setGameCount, 4); // 4 seconds duration
-    countUp(0, cupsOfCoffee, setCoffeeCount, 4); // 4 seconds duration
-  }, [downloads, games, cupsOfCoffee]);
+    if (isInView) {
+      countUp(0, downloads, setDownloadCount, 4);
+      countUp(0, games, setGameCount, 4);
+      countUp(0, cupsOfCoffee, setCoffeeCount, 4);
+    }
+  }, [isInView, downloads, games, cupsOfCoffee]);
 
   return (
-    <div className="bg-yellow-400 text-center py-16">
+    <div ref={ref} className="bg-yellow-400 text-center py-16">
       <div className="max-w-4xl mx-auto">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8 text-white font-bold text-4xl">
-          <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 1 }}>
+          <motion.div initial={{ opacity: 0 }} animate={isInView ? { opacity: 1 } : { opacity: 0 }} transition={{ duration: 1 }}>
             <p>{downloadCount.toLocaleString()}</p>
             <p className="text-lg mt-2">DOWNLOADS</p>
           </motion.div>
-          <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 1 }}>
+          <motion.div initial={{ opacity: 0 }} animate={isInView ? { opacity: 1 } : { opacity: 0 }} transition={{ duration: 1 }}>
             <p>{gameCount}</p>
             <p className="text-lg mt-2">GAMES</p>
           </motion.div>
-          <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 1 }}>
+          <motion.div initial={{ opacity: 0 }} animate={isInView ? { opacity: 1 } : { opacity: 0 }} transition={{ duration: 1 }}>
             <p>{coffeeCount.toLocaleString()}</p>
             <p className="text-lg mt-2">CUPS OF COFFEE</p>
           </motion.div>
@@ -67,7 +72,7 @@ const StatsComponent: React.FC<StatsComponentProps> = ({ downloads, games, cupsO
         <motion.div
           className="mt-16 text-3xl font-bold"
           initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
+          animate={isInView ? { opacity: 1 } : { opacity: 0 }}
           transition={{ delay: 2.5, duration: 0.8 }}
         >
           WE’RE HERE FOR YOU!
@@ -75,7 +80,7 @@ const StatsComponent: React.FC<StatsComponentProps> = ({ downloads, games, cupsO
         <motion.div
           className="text-xl mt-4"
           initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
+          animate={isInView ? { opacity: 1 } : { opacity: 0 }}
           transition={{ delay: 2.7, duration: 0.8 }}
         >
           GENERATING NEW IDEAS.
@@ -83,7 +88,7 @@ const StatsComponent: React.FC<StatsComponentProps> = ({ downloads, games, cupsO
         <motion.p
           className="text-lg mt-4 text-gray-800"
           initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
+          animate={isInView ? { opacity: 1 } : { opacity: 0 }}
           transition={{ delay: 2.9, duration: 0.8 }}
         >
           We are focused on creating and publishing high quality and incredibly addictive games for iOS and Android.
